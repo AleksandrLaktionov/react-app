@@ -1,3 +1,97 @@
 .todo-item {
-  color: aqua;
+  display: flex;
+  position: relative;
+  align-items: center;
+  min-width: 80%;
+  min-height: 4rem;
+  margin: .5rem;
+  padding: .5rem;
+  border-radius: 1em;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 10px 10px 10px #b3b3b3,
+    -10px -10px 10px #ffffff;
+
+  &__check {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 1.25em;
+    width: 1.25em;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 100;
+
+    &:checked+.todo-item__title::before {
+      content: "";
+      position: absolute;
+      top: 40%;
+      left: .5rem;
+      height: 1.25rem;
+      width: 1.25rem;
+      border: 1px solid #b3b3b3;
+      border-radius: 1.25em;
+      background: radial-gradient(rgb(0, 255, 0), #323232);
+      box-shadow: .2rem .2rem .25rem #b3b3b3,
+        -.2rem -.2rem .25rem #ffffff;
+      z-index: 1;
+    }
+  }
+
+  &__title {
+    margin-left: .5rem;
+    padding: .5rem;
+    border-radius: .5em;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    border-top: 1px solid #b3b3b3;
+    border-left: 1px solid #b3b3b3;
+    box-shadow: inset .1rem .1rem .1rem #b3b3b3,
+      inset -.1rem -.1rem .1rem #ffffff;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 40%;
+      left: .5rem;
+      height: 1.25rem;
+      width: 1.25rem;
+      border: 1px solid #b3b3b3;
+      border-radius: 1.25em;
+      background: radial-gradient(rgb(255, 0, 0), #323232);
+      box-shadow: .2rem .2rem .25rem #b3b3b3,
+        -.2rem -.2rem .25rem #ffffff;
+    }
+  }
+
+  &__delet {
+    margin-left: auto;
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    // outline: none;
+    background: transparent;
+    cursor: pointer;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 1.5em;
+      height: .2rem;
+      top: 40%;
+      right: 0;
+      transform: rotate(45deg);
+      border-radius: 1.25rem;
+      background: #c5c5c5;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 1.5em;
+      height: .2rem;
+      top: 40%;
+      right: 0;
+      transform: rotate(-45deg);
+      border-radius: 1.25rem;
+      background: #c5c5c5;
+    }
+  }
 }

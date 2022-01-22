@@ -1,8 +1,9 @@
 $background: #fff;
 
 .app {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: 100vh;
-  text-align: center;
+  height: 100%;
   background-color: $background;
 }
