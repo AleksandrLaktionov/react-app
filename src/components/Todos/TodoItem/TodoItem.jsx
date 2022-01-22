@@ -1,24 +1,31 @@
+import React, { useState } from 'react'
 import './TodoItem.scss';
 
-function TodoItem({ todo, change }) {
+function TodoItem({ todo }) {
+
+  const [state, setState] = useState(todo)
+  console.log(state)
   return (
     <div className="todo-item">
       <input
         className='todo-item__check'
         type="checkbox"
-        name={todo.id}
-        id={todo.id}
-        checked={todo.completed}
-        onChange={(e) => {
-          return change(todo.id)
+        name={state.id}
+        id={state.id}
+        checked={state.completed}
+        onChange={() => {
+          setState(prevState => ({
+            ...prevState,
+            ...{ completed: !prevState.completed }
+          }))
         }}
       />
       <label
-        htmlFor={'0' + todo.id}
+        htmlFor={'0' + state.id}
         className='todo-item__title'>
-        {todo.title}
+        {state.title}
       </label>
-      {todo.completed && <button className="todo-item__delet"></button>}
+      {state.completed && <button className="todo-item__delet"></button>}
     </div>
   )
 }

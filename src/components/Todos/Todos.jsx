@@ -12,7 +12,7 @@ class Todos extends Component {
         for: 5,
       },
       todos: [],
-      newLocal: new URL('https://jsonplaceholder.typicode.com/todos/?_limit=5')
+      newLocal: new URL('https://jsonplaceholder.typicode.com/todos/?userId=1')
     }
   }
 
@@ -21,24 +21,13 @@ class Todos extends Component {
     getTodos(this.state.newLocal.toString())
       .then(data => {
         this.setState(() => ({
-          todos: Object.create(data)
+          todos: data
         }))
       }).catch(e => console.log(e.name))
   }
 
   componentDidUpdate() {
     console.log('did update')
-  }
-
-  handleChange = (id) => {
-    this.setState(prevState => ({
-      todos: prevState.todos.map(todo => {
-        if (todo.id === id) {
-          todo.completed = !todo.completed
-        }
-        return todo
-      })
-    }))
   }
 
   render() {
@@ -48,7 +37,6 @@ class Todos extends Component {
         <TodoItem
           key={todo.id}
           todo={todo}
-          change={this.handleChange}
         />
       )
     }).slice(this.state.slice.to, this.state.slice.for)
