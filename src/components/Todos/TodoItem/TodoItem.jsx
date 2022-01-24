@@ -4,7 +4,7 @@ import './TodoItem.scss';
 function TodoItem({ todo }) {
 
   const [state, setState] = useState(todo)
-  console.log(state)
+
   return (
     <div className="todo-item">
       <input
@@ -25,7 +25,6 @@ function TodoItem({ todo }) {
         className='todo-item__title'>
         {state.title}
       </label>
-      {state.completed && <button className="todo-item__delet"></button>}
     </div>
   )
 }

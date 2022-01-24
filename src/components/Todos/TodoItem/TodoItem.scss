@@ -2,8 +2,8 @@
   display: flex;
   position: relative;
   align-items: center;
-  min-width: 80%;
-  min-height: 4rem;
+  width: 80%;
+  height: 3.75rem;
   margin: .5rem;
   padding: .5rem;
   border-radius: 1em;
@@ -14,8 +14,8 @@
   &__check {
     -webkit-appearance: none;
     -moz-appearance: none;
-    height: 1.25em;
-    width: 1.25em;
+    height: 1.25rem;
+    width: 1.25rem;
     cursor: pointer;
     opacity: 0;
     z-index: 100;
@@ -23,15 +23,13 @@
     &:checked+.todo-item__title::before {
       content: "";
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: .5rem;
       height: 1.25rem;
       width: 1.25rem;
       border: 1px solid #b3b3b3;
       border-radius: 1.25em;
       background: radial-gradient(rgb(0, 255, 0), #323232);
-      box-shadow: .2rem .2rem .25rem #b3b3b3,
-        -.2rem -.2rem .25rem #ffffff;
       z-index: 1;
     }
   }
@@ -45,11 +43,13 @@
     border-left: 1px solid #b3b3b3;
     box-shadow: inset .1rem .1rem .1rem #b3b3b3,
       inset -.1rem -.1rem .1rem #ffffff;
+    text-shadow: 1px 1px 1px #b3b3b3,
+      -1px -1px 1px #ffffff;
 
     &::after {
       content: "";
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: .5rem;
       height: 1.25rem;
       width: 1.25rem;
@@ -58,40 +58,6 @@
       background: radial-gradient(rgb(255, 0, 0), #323232);
       box-shadow: .2rem .2rem .25rem #b3b3b3,
         -.2rem -.2rem .25rem #ffffff;
-    }
-  }
-
-  &__delet {
-    margin-left: auto;
-    position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    // outline: none;
-    background: transparent;
-    cursor: pointer;
-
-    &::before {
-      position: absolute;
-      content: "";
-      width: 1.5em;
-      height: .2rem;
-      top: 40%;
-      right: 0;
-      transform: rotate(45deg);
-      border-radius: 1.25rem;
-      background: #c5c5c5;
-    }
-
-    &::after {
-      position: absolute;
-      content: "";
-      width: 1.5em;
-      height: .2rem;
-      top: 40%;
-      right: 0;
-      transform: rotate(-45deg);
-      border-radius: 1.25rem;
-      background: #c5c5c5;
     }
   }
 }
