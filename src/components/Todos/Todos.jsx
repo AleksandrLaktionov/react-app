@@ -26,29 +26,43 @@ class Todos extends Component {
       }).catch(e => console.log(e.name))
   }
 
-  // componentDidUpdate() {
-  //   console.log('did update')
-  //   console.log(this.state)
-  // }
+  handleChange = (id) => {
+    console.log('handleChange')
+    this.setState(prevState => {
+      return {
+        todos: prevState.todos.map(todo => {
+          return todo.id === id ? {...todo, ...{completed: !todo.completed}} : todo
+        })
+      }
+    })
+  }
 
   getNextList = (n) => {
     console.log('getNextList')
-    this.setState(prevState => ({
-      slice: {
-        to: prevState.slice.to + n,
-        for: prevState.slice.for + n,
+    this.setState(prevState => {
+      if (prevState.slice.for < prevState.todos.length) {
+        return {
+          slice: {
+            to: prevState.slice.to + n,
+            for: prevState.slice.for + n,
+          }
+        }
       }
-    }))
+    })
   }
 
   getPreviousList = (p) => {
     console.log('getPreviousList')
-    this.setState(prevState => ({
-      slice: {
-        to: prevState.slice.to - p,
-        for: prevState.slice.for - p,
+    this.setState(prevState => {
+      if (prevState.slice.to > 0) {
+        return {
+          slice: {
+            to: prevState.slice.to - p,
+            for: prevState.slice.for - p,
+          }
+        }
       }
-    }))
+    })
   }
 
   render() {
@@ -56,6 +70,7 @@ class Todos extends Component {
       return (
         <TodoItem
           key={todo.id}
+          handleChange={this.handleChange}
           todo={todo}
         />
       )

@@ -4,12 +4,11 @@ import './index.css';
 import 'normalize.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { StrictMode } from 'react/cjs/react.production.min';
 
 ReactDOM.render(
-  <StrictMode>
+  <React.StrictMode>
     <App />
-  </StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
