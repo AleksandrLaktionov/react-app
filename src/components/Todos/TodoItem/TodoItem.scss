@@ -4,12 +4,12 @@
   align-items: center;
   width: 80%;
   height: 3.75rem;
-  margin: .5rem;
+  margin: .75rem;
   padding: .5rem;
   border-radius: 1em;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
-  box-shadow: 10px 10px 10px #b3b3b3,
-    -10px -10px 10px #ffffff;
+  box-shadow: .75rem .75rem .8rem #b3b3b3,
+    -.75rem -.75rem .8rem #ffffff;
 
   &__check {
     -webkit-appearance: none;
