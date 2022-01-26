@@ -23,7 +23,8 @@
     &:checked+.todo-item__title::before {
       content: "";
       position: absolute;
-      top: 35%;
+      top: 50%;
+      transform: translateY(-50%);
       left: .5rem;
       height: 1.25rem;
       width: 1.25rem;
@@ -49,7 +50,8 @@
     &::after {
       content: "";
       position: absolute;
-      top: 35%;
+      top: 50%;
+      transform: translateY(-50%);
       left: .5rem;
       height: 1.25rem;
       width: 1.25rem;

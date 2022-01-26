@@ -1,4 +1,4 @@
-export default async function getTodos(url) {
+export async function getData(url) {
   try {
       const response = await fetch(url);
       if (!response.ok) throw new Error('Запрос не прошёл')

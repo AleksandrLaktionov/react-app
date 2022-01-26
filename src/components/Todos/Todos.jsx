@@ -1,6 +1,6 @@
 import { Component } from "react";
 import ListScrolling from "./ListScrolling/ListScrolling";
-import getTodos from "./TodoItem/dataTodos";
+import { getData } from "../data";
 import TodoItem from "./TodoItem/TodoItem";
 import './Todos.scss'
 
@@ -18,7 +18,7 @@ class Todos extends Component {
   }
 
   componentDidMount() {
-    getTodos(this.state.newLocal.toString())
+    getData(this.state.newLocal.toString())
       .then(data => {
         this.setState(prevState => ({
           todos: [...prevState.todos, ...data]
@@ -31,7 +31,7 @@ class Todos extends Component {
     this.setState(prevState => {
       return {
         todos: prevState.todos.map(todo => {
-          return todo.id === id ? {...todo, ...{completed: !todo.completed}} : todo
+          return todo.id === id ? { ...todo, ...{ completed: !todo.completed } } : todo
         })
       }
     })

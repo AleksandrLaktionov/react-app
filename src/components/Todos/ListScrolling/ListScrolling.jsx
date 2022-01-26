@@ -6,7 +6,7 @@ const ListScrolling = ({ getNextList, getPreviousList }) => {
       <button onClick={e => {
         getPreviousList(5)
       }}>{'<<<'}</button>
-      {[...'...'].map(i=><span></span>)}
+      {[...'...'].map((item,index)=><span key={index}></span>)}
       <button onClick={e => {
         getNextList(5)
       }}>{'>>>'}</button>
