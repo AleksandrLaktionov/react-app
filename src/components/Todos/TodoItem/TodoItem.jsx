@@ -1,6 +1,6 @@
 import './TodoItem.scss';
 
-function TodoItem({ todo , handleChange}) {
+const TodoItem = ({ todo, handleChange }) => {
 
   return (
     <div className="todo-item">

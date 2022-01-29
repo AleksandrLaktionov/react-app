@@ -1,5 +1,6 @@
 import { Component } from "react"
 import { getData } from '../data'
+import Loading from "../Loading/Loading"
 import './GeneratorMeme.scss'
 
 class GeneratorMeme extends Component {
@@ -10,7 +11,7 @@ class GeneratorMeme extends Component {
       bottomText: '',
       newLocal: new URL('https://api.imgflip.com/get_memes'),
       allImgs: [],
-      randImg: 'http://i.imgflip.com/1bij.jpg'
+      randImg: ''
     }
   }
 
@@ -56,12 +57,15 @@ class GeneratorMeme extends Component {
             onChange={this.handleChange}
           />
         </form>
-        <div className="generator-meme">
-          <img
-            src={this.state.randImg} alt='meme' />
-          <h1 className="generator-meme__top">{this.state.topText}</h1>
-          <h1 className="generator-meme__bottom">{this.state.bottomText}</h1>
-        </div>
+        {!!this.state.randImg.length && !!this.state.allImgs.length ?
+          <div className="generator-meme">
+            <img
+              src={this.state.randImg} alt='meme' />
+            <h1 className="generator-meme__top">{this.state.topText}</h1>
+            <h1 className="generator-meme__bottom">{this.state.bottomText}</h1>
+          </div>
+          : <Loading />
+        }
       </div>
     )
   }

@@ -1,0 +1,38 @@
+.loading {
+  $colors: #8ff8fd, #74c3e7, #4a94cf, #195bbe, #003688;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+
+  span {
+    position: relative;
+    width: 2em;
+    height: 2em;
+    border: 2px solid #b3b3b3;
+    border-radius: 50%;
+    animation: loade 2s ease-out infinite;
+
+    @for $var from 1 to 6 {
+      &:nth-child(#{$var}) {
+        background: radial-gradient(nth($colors, $var), #000);
+        animation-delay: $var * 0.2s;
+      }
+    }
+  }
+}
+
+@keyframes loade {
+  0% {
+    background: inherit;
+  }
+
+  50% {
+    box-shadow: .3rem .3rem .35rem #b3b3b3,
+      -.3rem -.3rem .35rem #ffffff;
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}

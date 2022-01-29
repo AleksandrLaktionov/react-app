@@ -2,7 +2,8 @@ import { Component } from "react";
 import ListScrolling from "./ListScrolling/ListScrolling";
 import { getData } from "../data";
 import TodoItem from "./TodoItem/TodoItem";
-import './Todos.scss'
+import './Todos.scss';
+import Loading from "../Loading/Loading";
 
 class Todos extends Component {
   constructor(props) {
@@ -27,7 +28,6 @@ class Todos extends Component {
   }
 
   handleChange = (id) => {
-    console.log('handleChange')
     this.setState(prevState => {
       return {
         todos: prevState.todos.map(todo => {
@@ -38,7 +38,6 @@ class Todos extends Component {
   }
 
   getNextList = (n) => {
-    console.log('getNextList')
     this.setState(prevState => {
       if (prevState.slice.for < prevState.todos.length) {
         return {
@@ -52,7 +51,6 @@ class Todos extends Component {
   }
 
   getPreviousList = (p) => {
-    console.log('getPreviousList')
     this.setState(prevState => {
       if (prevState.slice.to > 0) {
         return {
@@ -78,7 +76,7 @@ class Todos extends Component {
 
     return (
       <div className="todos" >
-        {todoItems}
+        {!!this.state.todos.length ? todoItems : <Loading />}
         <ListScrolling
           getNextList={this.getNextList}
           getPreviousList={this.getPreviousList}
