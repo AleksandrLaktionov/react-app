@@ -1,12 +1,12 @@
 import './App.scss';
-import GeneratorMeme from './components/GeneratorMeme/GeneratorMeme';
+import Generator from './components/GeneratorMeme/Generator';
 import Todos from './components/Todos/Todos';
 
 function App() {
   return (
     <div className="app">
       <Todos />
-      <GeneratorMeme />
+      <Generator />
     </div>
   );
 }

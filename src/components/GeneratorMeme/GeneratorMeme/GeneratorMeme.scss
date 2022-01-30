@@ -1,0 +1,35 @@
+.generator-meme {
+  position: relative;
+  max-width: 50rem;
+  max-height: 50rem;
+  border-radius: 1em;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: .75rem .75rem .8rem #b3b3b3,
+    -.75rem -.75rem .8rem #ffffff;
+  overflow: hidden;
+
+  img {
+    border-radius: 1em;
+    width: 100%;
+    height: 100%;
+  }
+
+  h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: .075rem .075rem .075rem #b3b3b3,
+      -.075rem -.075rem .075rem #ffffff;
+    letter-spacing: .3rem;
+  }
+
+  &__top {
+    top: 5%;
+  }
+
+  &__bottom {
+    bottom: 5%;
+  }
+}
