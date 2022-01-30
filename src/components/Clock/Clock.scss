@@ -1,0 +1,36 @@
+.clock {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: .75rem .75rem .8rem #b3b3b3,
+    -.75rem -.75rem .8rem #ffffff;
+
+  @mixin hands($width, $height) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: 0 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: $width;
+    height: $height;
+    background: #3d3d3d;
+    border-radius: 1em;
+    box-shadow: .075rem .075rem .08rem #b3b3b3,
+      -.075rem -.075rem .08rem #ffffff;
+  }
+
+  #hours {
+    @include hands(.5rem, 2.5rem)
+  }
+
+  #minutes {
+    @include hands(.3rem, 3rem);
+  }
+
+  #seconds {
+    @include hands(.1rem, 4rem);
+  }
+}

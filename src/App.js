@@ -1,10 +1,12 @@
 import './App.scss';
-import Generator from './components/GeneratorMeme/Generator';
+import Clock from './components/Clock/Clock';
+import Generator from './components/Generator/Generator';
 import Todos from './components/Todos/Todos';
 
 function App() {
   return (
     <div className="app">
+      <Clock />
       <Todos />
       <Generator />
     </div>
