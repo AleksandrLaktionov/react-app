@@ -14,12 +14,14 @@ class Todos extends Component {
         for: 5,
       },
       todos: [],
-      newLocal: new URL('https://jsonplaceholder.typicode.com/todos/?userId=1')
+      newLocal: new URL('https://jsonplaceholder.typicode.com/todos')
     }
   }
 
   componentDidMount() {
-    getData(this.state.newLocal.toString())
+    const url = this.state.newLocal
+    url.search = `userId=1`
+    getData(url.href)
       .then(data => {
         this.setState(prevState => ({
           todos: [...prevState.todos, ...data]
@@ -76,7 +78,7 @@ class Todos extends Component {
 
     return (
       <div className="todos" >
-        {!!this.state.todos.length ? todoItems : <Loading />}
+        {<Loading /> && todoItems}
         <ListScrolling
           getNextList={this.getNextList}
           getPreviousList={this.getPreviousList}

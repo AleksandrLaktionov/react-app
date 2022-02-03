@@ -35,7 +35,8 @@ class Generator extends Component {
 
   getRandomImg = (e) => {
     e.preventDefault()
-    const randNumber = Math.floor(Math.random() * 100)
+    e.stopPropagation()
+    const randNumber = Math.floor(Math.random() * this.state.allImgs.length)
     this.setState(prevState => ({
       randImg: prevState.allImgs[randNumber].url
     }))
