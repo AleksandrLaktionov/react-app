@@ -1,3 +1,30 @@
+import { openDB, deleteDB } from 'idb';
+
+export async function doDataBase(str, vers) {
+  try {
+    let db = await openDB(str, vers, {
+      upgrade(db) {
+        db.createObjectStore('todos', { keyPath: 'id' })
+      }
+    })
+    db.transaction('todos', 'readwrite').objectStore('todos')
+
+    return db
+  }
+  catch (e) {
+    console.error(e.name, e.message)
+  }
+}
+
+export function deletDataBase(str) {
+  try {
+    deleteDB(str)
+  }
+  catch (e) {
+    console.error(e.name, e.message)
+  }
+}
+
 export async function getData(url) {
   try {
     const response = await fetch(url);
@@ -20,8 +47,6 @@ export async function postData(url = '', body = {}) {
       },
     })
     if (!response.ok) throw new Error('Запрос не прошёл')
-    const result = await response.json()
-    return result
   }
   catch (e) {
     console.error('Ошибка:', e.message)
@@ -38,8 +63,6 @@ export async function putData(url = '', body = {}) {
       },
     })
     if (!response.ok) throw new Error('Запрос не прошёл')
-    const result = await response.json()
-    return result()
   }
   catch (e) {
     console.log('Ошибка:', e.message)

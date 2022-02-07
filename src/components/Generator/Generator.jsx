@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { getData } from '../data'
+import { getData } from '../../data'
 import Loading from "../Loading/Loading"
 import GeneratorForm from "./GeneratorForm/GeneratorForm"
 import GeneratorMeme from "./GeneratorMeme/GeneratorMeme"

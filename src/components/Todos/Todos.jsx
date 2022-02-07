@@ -1,6 +1,6 @@
 import { Component } from "react";
 import ListScrolling from "./ListScrolling/ListScrolling";
-import { getData } from "../data";
+import { doDataBase, deletDataBase } from "../../data";
 import TodoItem from "./TodoItem/TodoItem";
 import './Todos.scss';
 import Loading from "../Loading/Loading";
@@ -14,19 +14,42 @@ class Todos extends Component {
         for: 5,
       },
       todos: [],
-      newLocal: new URL('https://jsonplaceholder.typicode.com/todos')
     }
   }
 
   componentDidMount() {
-    const url = this.state.newLocal
-    url.search = `userId=1`
-    getData(url.href)
-      .then(data => {
+    doDataBase('store')
+      .then(db => {
+        db.put('todos', {
+          id: 1,
+          title: 'text',
+          completed: false
+        })
+        db.put('todos', {
+          id: 2,
+          title: 'next text',
+          completed: true
+        })
+        db.put('todos', {
+          id: 3,
+          title: 'test',
+          completed: true
+        })
+        db.put('todos', {
+          id: 4,
+          title: 'new next test',
+          completed: true
+        })
+        return db.getAll('todos')
+      }).then(todos => {
         this.setState(prevState => ({
-          todos: [...prevState.todos, ...data]
+          todos: [...prevState.todos, ...todos]
         }))
       }).catch(e => console.log(e.name))
+  }
+
+  componentWillUnmount() {
+    deletDataBase('store')
   }
 
   handleChange = (id) => {
