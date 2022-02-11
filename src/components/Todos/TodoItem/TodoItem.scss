@@ -3,7 +3,7 @@
   position: relative;
   align-items: center;
   flex: 1;
-  width: 80%;
+  width: 50%;
   height: 3.75rem;
   padding: .5rem;
   border-radius: 1em;
@@ -40,8 +40,6 @@
     padding: .5rem;
     border-radius: .5em;
     background: linear-gradient(145deg, #cacaca, #f0f0f0);
-    border-top: 1px solid #b3b3b3;
-    border-left: 1px solid #b3b3b3;
     box-shadow: inset .1rem .1rem .1rem #b3b3b3,
       inset -.1rem -.1rem .1rem #ffffff;
     text-shadow: 1px 1px 1px #b3b3b3,
@@ -61,5 +59,9 @@
       box-shadow: .2rem .2rem .25rem #b3b3b3,
         -.2rem -.2rem .25rem #ffffff;
     }
+  }
+
+  span {
+    margin: auto .5em auto auto;
   }
 }

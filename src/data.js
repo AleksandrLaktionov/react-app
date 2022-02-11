@@ -1,13 +1,13 @@
 import { openDB, deleteDB } from 'idb';
 
-export async function doDataBase(str, vers) {
+export async function doDataBase(strDB, vers, objStore) {
   try {
-    let db = await openDB(str, vers, {
+    let db = await openDB(strDB, vers, {
       upgrade(db) {
-        db.createObjectStore('todos', { keyPath: 'id' })
+        db.createObjectStore(objStore, { keyPath: 'id' })
       }
     })
-    db.transaction('todos', 'readwrite').objectStore('todos')
+    db.transaction(objStore, 'readwrite').objectStore(objStore)
 
     return db
   }

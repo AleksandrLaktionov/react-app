@@ -1,7 +1,7 @@
 import './TodoItem.scss';
 
 const TodoItem = ({ todo, handleChange }) => {
-
+  const date = new Date(todo.id)
   return (
     <div className="todo-item">
       <input
@@ -17,6 +17,15 @@ const TodoItem = ({ todo, handleChange }) => {
         className='todo-item__title'>
         {todo.title}
       </label>
+      <span>
+        {date.getDate()}.
+        {date.getMonth() + 1}.
+        {date.getFullYear()}
+        {/* <br />
+        {date.getHours()}:
+        {date.getMinutes()}:
+        {date.getSeconds()} */}
+      </span>
     </div>
   )
 }

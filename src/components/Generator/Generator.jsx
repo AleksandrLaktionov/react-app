@@ -19,7 +19,7 @@ class Generator extends Component {
   }
 
   componentDidMount() {
-    getData(this.state.newLocal.toString())
+    getData(this.state.newLocal.href)
       .then(resp => {
         this.setState(prevState => ({
           allImgs: resp.data.memes,
