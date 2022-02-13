@@ -1,6 +1,6 @@
 import './TodoItem.scss';
 
-const TodoItem = ({ todo, handleChange }) => {
+const TodoItem = ({ todo, handleChange, deletTodo }) => {
   const date = new Date(todo.id)
   return (
     <div className="todo-item">
@@ -17,7 +17,7 @@ const TodoItem = ({ todo, handleChange }) => {
         className='todo-item__title'>
         {todo.title}
       </label>
-      <span>
+      <span className='todo-item__time'>
         {date.getDate()}.
         {date.getMonth() + 1}.
         {date.getFullYear()}
@@ -26,6 +26,9 @@ const TodoItem = ({ todo, handleChange }) => {
         {date.getMinutes()}:
         {date.getSeconds()} */}
       </span>
+      {todo.completed && <button
+        className='todo-item__delet'
+        onClick={e=>deletTodo(todo.id)}></button>}
     </div>
   )
 }

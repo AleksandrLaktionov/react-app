@@ -12,13 +12,13 @@ export async function doDataBase(strDB, vers, objStore) {
     return db
   }
   catch (e) {
-    console.error(e.name, e.message)
+    console.error('Ошибка', e.message)
   }
 }
 
-export function deletDataBase(str) {
+export async function deletDataBase(strDB) {
   try {
-    deleteDB(str)
+    await deleteDB(strDB)
   }
   catch (e) {
     console.error(e.name, e.message)

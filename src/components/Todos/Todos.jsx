@@ -1,10 +1,10 @@
 import { Component } from "react";
-import ListScrolling from "./ListScrolling/ListScrolling";
-import Loading from "../Loading/Loading";
 import { doDataBase, deletDataBase } from "../../data";
-import TodoItem from "./TodoItem/TodoItem";
-import './Todos.scss';
 import TodoForm from "./TodoForm/TodoForm";
+import TodoItem from "./TodoItem/TodoItem";
+import ClearTodos from "./ClearTodos/ClearTodos";
+import Loading from "../Loading/Loading";
+import './Todos.scss';
 
 class Todo {
   constructor(title) {
@@ -18,11 +18,7 @@ class Todos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [],
-      slice: {
-        to: 0,
-        for: 5,
-      },
+      todos: []
     }
   }
 
@@ -35,16 +31,13 @@ class Todos extends Component {
         this.setState(prevState => ({
           todos: [...prevState.todos, ...todos]
         }))
-      }).catch(e => console.log(e.name))
+      })
+      .catch(e => console.log(e.name, e.message))
   }
 
-  // componentDidUpdate() {
-  //   console.log(this.state.todos)
-  // }
-
-  // componentWillUnmount() {
-  //   deletDataBase('store')
-  // }
+  componentWillUnmount() {
+    deletDataBase('store')
+  }
 
   setTodo = (event) => {
     event.preventDefault()
@@ -69,11 +62,36 @@ class Todos extends Component {
       .catch(err => console.log(err.name, err.message))
   }
 
+  deletTodo = (id) => {
+    doDataBase('store', 1, 'todos')
+      .then(
+        // удаляем задачу из списка дел в бд
+        db => {
+          db.delete('todos', id)
+          return db.getAll('todos')
+        }
+      )
+      .then(
+        // обновляем список дел в state
+        newTodos => {
+          this.setState({
+            todos: newTodos
+          })
+        })
+  }
+
+  clearTodos = (e) => {
+    e.preventDefault()
+    doDataBase('store', 1, 'todos')
+      .then(db => db.clear('todos'))
+      .then(this.setState({ todos: [] }))
+  }
+
   handleChange = (id) => {
     doDataBase('store', 1, 'todos')
       // получаем объект из бд по id
       .then(db => db.get('todos', id)
-        // изменяем в объекте св-во completed
+        // изменяем в объекте бд св-во completed
         .then(objDB => ({ ...objDB, ...{ completed: !objDB.completed } }))
         .then(todo => todo))
       // изменяем объект в бд по id
@@ -93,53 +111,23 @@ class Todos extends Component {
       .catch(e => console.log(e.name, e.message))
   }
 
-  getNextList = (n) => {
-    this.setState(prevState => {
-      if (prevState.slice.for < prevState.todos.length) {
-        return {
-          slice: {
-            to: prevState.slice.to + n,
-            for: prevState.slice.for + n,
-          }
-        }
-      }
-    })
-  }
-
-  getPreviousList = (p) => {
-    this.setState(prevState => {
-      if (prevState.slice.to > 0) {
-        return {
-          slice: {
-            to: prevState.slice.to - p,
-            for: prevState.slice.for - p,
-          }
-        }
-      }
-    })
-  }
-
   render() {
     const todoItems = this.state.todos.map(todo => {
       return (
         <TodoItem
           key={todo.id}
           handleChange={this.handleChange}
+          deletTodo={this.deletTodo}
           todo={todo}
         />
       )
-    })
-      .slice(this.state.slice.to, this.state.slice.for)
-      .reverse()
+    }).reverse()
 
     return (
       <div className="todos" >
         <TodoForm setTodo={this.setTodo} />
         {< Loading /> && todoItems}
-        {this.state.todos.length >= 5 && < ListScrolling
-          getNextList={this.getNextList}
-          getPreviousList={this.getPreviousList}
-        />}
+        {!!this.state.todos.length && < ClearTodos clearTodos={this.clearTodos} />}
       </div >
     )
   }

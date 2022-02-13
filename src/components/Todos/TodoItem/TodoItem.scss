@@ -61,7 +61,41 @@
     }
   }
 
-  span {
+  &__time {
     margin: auto .5em auto auto;
+    text-shadow: 1px 1px 1px #b3b3b3,
+      -1px -1px 1px #ffffff;
+  }
+
+  &__delet {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      content: '';
+      width: 20px;
+      height: 3px;
+      background: #b3b3b3;
+      transform: translateY(-50%) rotate(-45deg) ;
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      content: '';
+      width: 20px;
+      height: 3px;
+      background: #b3b3b3;
+      transform: translateY(-50%) rotate(45deg) ;
+    }
   }
 }
