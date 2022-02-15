@@ -1,5 +1,5 @@
 .loading {
-  $colors: #8ff8fd, #74c3e7, #4a94cf, #195bbe, #003688;
+  $colors: #8ff8fd, #74c3e7, #4a94cf, #2067d1, #0052cc;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,15 +7,15 @@
 
   span {
     position: relative;
-    width: 2em;
-    height: 2em;
+    width: 1.5em;
+    height: 1.5em;
     border: 2px solid #b3b3b3;
     border-radius: 50%;
-    animation: loade 2s ease-out infinite;
+    animation: loade 2s ease-in-out infinite;
 
     @for $var from 1 to 6 {
       &:nth-child(#{$var}) {
-        background: radial-gradient(nth($colors, $var), #000);
+        background: radial-gradient(nth($colors, $var) 15%, #000);
         animation-delay: $var * 0.2s;
       }
     }
@@ -24,7 +24,7 @@
 
 @keyframes loade {
   0% {
-    background: inherit;
+    background: transparent;
   }
 
   50% {

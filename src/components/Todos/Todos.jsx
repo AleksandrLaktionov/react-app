@@ -18,6 +18,7 @@ class Todos extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      todo: '',
       todos: []
     }
   }
@@ -35,31 +36,37 @@ class Todos extends Component {
       .catch(e => console.log(e.name, e.message))
   }
 
-  componentWillUnmount() {
-    deletDataBase('store')
+  // componentWillUnmount() {
+  //   deletDataBase('store')
+  // }
+
+  changeTodo = (e) => {
+    e.preventDefault()
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
-  setTodo = (event) => {
-    event.preventDefault()
-
-    doDataBase('store', 1, 'todos')
-      .then(
-        // доповляем задачу
-        db => {
-          db.add('todos', new Todo(event.target.todo.value))
-          return db.getAll('todos')
-        }
-      )
-      .then(
-        // обновляем список дел в state
-        newTodos => {
-          this.setState({
-            todos: newTodos
+  setTodo = (e) => {
+    e.preventDefault()
+    if (this.state.todo.length > 0)
+      doDataBase('store', 1, 'todos')
+        .then(
+          // доповляем задачу в бд
+          db => {
+            db.add('todos', new Todo(this.state.todo))
+            return db.getAll('todos')
+          }
+        )
+        .then(
+          // обновляем список дел в state
+          newTodos => {
+            this.setState({
+              todo: '',
+              todos: newTodos
+            })
           })
-        })
-      // обнуляем поле ввода
-      .then(() => event.target.todo.value = '')
-      .catch(err => console.log(err.name, err.message))
+        .catch(err => console.log(err.name, err.message))
   }
 
   deletTodo = (id) => {
@@ -87,7 +94,7 @@ class Todos extends Component {
       .then(this.setState({ todos: [] }))
   }
 
-  handleChange = (id) => {
+  handleCheck = (id) => {
     doDataBase('store', 1, 'todos')
       // получаем объект из бд по id
       .then(db => db.get('todos', id)
@@ -116,7 +123,7 @@ class Todos extends Component {
       return (
         <TodoItem
           key={todo.id}
-          handleChange={this.handleChange}
+          handleCheck={this.handleCheck}
           deletTodo={this.deletTodo}
           todo={todo}
         />
@@ -125,7 +132,10 @@ class Todos extends Component {
 
     return (
       <div className="todos" >
-        <TodoForm setTodo={this.setTodo} />
+        <TodoForm
+          changeTodo={this.changeTodo}
+          setTodo={this.setTodo}
+          todo={this.state.todo} />
         {< Loading /> && todoItems}
         {!!this.state.todos.length && < ClearTodos clearTodos={this.clearTodos} />}
       </div >
